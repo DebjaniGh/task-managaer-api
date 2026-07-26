@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { CreateTaskDto } from '../dto/create-task.dto';
+import { UpdateTaskDto } from '../dto/update-task.dto';
 
 @Controller('tasks') // sets the base route: /tasks
 export class TasksController {
@@ -10,8 +20,21 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.tasksService.findOne(id);
+  }
+
   @Post()
-  create(@Body() body: { title: string }) {
-    return this.tasksService.create(body.title);
+  create(@Body() createTaskDto: CreateTaskDto) {
+    return this.tasksService.create(createTaskDto);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateTaskDto: UpdateTaskDto,
+  ) {
+    return this.tasksService.update(id, updateTaskDto);
   }
 }

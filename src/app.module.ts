@@ -14,10 +14,14 @@ import { Task } from './tasks/entities/task.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        type: config.get<string>('DATABASE_TYPE') as 'sqlite',
+        type: config.get<string>('DATABASE_TYPE') as 'postgres',
+        host: config.get<string>('DATABASE_HOST'),
+        port: config.get<number>('DATABASE_PORT'),
+        username: config.get<string>('DATABASE_USERNAME'),
+        password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
         entities: [Task],
-        synchronize: true,
+        synchronize: false, // set to false in production, use migrations instead
       }),
     }),
     TasksModule,

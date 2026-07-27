@@ -10,4 +10,7 @@ export class Task {
 
   @Column({ default: false })
   completed!: boolean;
+
+  @Column({ nullable: true })
+  dueDate!: string;
 }

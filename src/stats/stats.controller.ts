@@ -5,8 +5,8 @@ import { TasksService } from 'src/tasks/tasks.service';
 export class StatsController {
   constructor(private readonly tasksService: TasksService) {}
 
-  @Get()
-  getStats() {
-    return this.tasksService.findAll().length;
-  }
+  // @Get()
+  // getStats() {
+  //   return this.tasksService.findAll().length;
+  // }
 }

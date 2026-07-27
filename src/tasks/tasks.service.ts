@@ -63,4 +63,17 @@ export class TasksService {
     const task = this.tasksRepository.create(dto); // builds an entity instance (not yet saved)
     return this.tasksRepository.save(task); // actually persists it in db
   }
+
+  async update(id: number, dto: UpdateTaskDto): Promise<Task> {
+    const task = await this.findOne(id); // reuses the NotFoundException check
+    Object.assign(task, dto);
+    return this.tasksRepository.save(task); // save() on an existing id = UPDATE, not INSERT
+  }
+
+  async remove(id: number): Promise<void> {
+    const result = await this.tasksRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Task with id ${id} not found`);
+    }
+  }
 }

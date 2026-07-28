@@ -6,6 +6,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { StatsModule } from './stats/stats.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './tasks/entities/task.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { Task } from './tasks/entities/task.entity';
     }),
     TasksModule,
     StatsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,11 +7,14 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
+import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
 
+@UseGuards(ApiKeyGuard) // applies the ApiKeyGuard to all routes in this controller
 @Controller('tasks') // sets the base route: /tasks
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}

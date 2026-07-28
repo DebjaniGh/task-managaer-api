@@ -7,6 +7,7 @@ import { StatsModule } from './stats/stats.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './tasks/entities/task.entity';
 import { AuthModule } from './auth/auth.module';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { AuthModule } from './auth/auth.module';
         username: config.get<string>('DATABASE_USERNAME'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [Task],
+        entities: [Task, User],
         synchronize: false, // set to false in production, use migrations instead
       }),
     }),

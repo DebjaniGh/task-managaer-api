@@ -12,9 +12,9 @@ import {
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
-import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
+import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 
-@UseGuards(ApiKeyGuard) // applies the ApiKeyGuard to all routes in this controller
+@UseGuards(AuthGuard('jwt')) // applies the jwt guard to all routes in this controller
 @Controller('tasks') // sets the base route: /tasks
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}

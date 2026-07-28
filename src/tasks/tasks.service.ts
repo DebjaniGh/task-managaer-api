@@ -59,9 +59,14 @@ export class TasksService {
     return task;
   }
 
-  create(dto: CreateTaskDto): Promise<Task> {
-    const task = this.tasksRepository.create(dto); // builds an entity instance (not yet saved)
-    return this.tasksRepository.save(task); // actually persists it in db
+  findByUser(userId: number): Promise<Task[]> {
+    return this.tasksRepository.findBy({ userId });
+  }
+
+  // tasks.service.ts
+  create(dto: CreateTaskDto, userId: number): Promise<Task> {
+    const task = this.tasksRepository.create({ ...dto, userId });
+    return this.tasksRepository.save(task);
   }
 
   async update(id: number, dto: UpdateTaskDto): Promise<Task> {

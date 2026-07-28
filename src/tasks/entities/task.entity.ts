@@ -13,4 +13,7 @@ export class Task {
 
   @Column({ nullable: true })
   dueDate!: string;
+
+  @Column({ nullable: true })
+  userId!: number;
 }

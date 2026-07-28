@@ -4,6 +4,10 @@ import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: 'http://localhost:4200', // your Angular dev server
+    credentials: true, // allows cookies/auth headers to be sent cross-origin
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // strips properties NOT defined in the DTO
